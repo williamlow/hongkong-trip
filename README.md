@@ -1,32 +1,34 @@
 # One More Bite — Hong Kong food notebook
 
-A mobile-friendly static restaurant guide for a week in Hong Kong, based at Eaton HK in Jordan. It focuses on casual Hong Kong and Chinese food, with an interactive Leaflet/OpenStreetMap map, branch-specific Google Maps links, a near-hotel filter, search, food and neighbourhood filters, saved places and a flexible seven-day plan.
+A simple, mobile-friendly guide to 34 casual Hong Kong and Chinese food stops, based at Eaton HK in Jordan. Includes a Leaflet/OpenStreetMap map, branch-specific Google Maps links, estimated walks from the hotel, search and food/neighbourhood filters, saved places and a flexible seven-day plan.
 
-## Content status: research blocked
+Research was checked on **31 October 2026** against Eater, The Infatuation, the 2026 MICHELIN Guide, Sassy Hong Kong and OpenRice, with tourism-board neighbourhood background. Every restaurant has article or listing links. See [RESEARCH.md](RESEARCH.md) for methodology, source scope, corrections and limitations. Prices are planning estimates, not current menu quotes; maps and walks are approximate. This is desk research, not a claim of personal visits.
 
-**This is a provisional draft, not a researched restaurant recommendation list.** The 30 candidate entries were assembled from general knowledge. Live access to Time Out, Eater, The Infatuation, MICHELIN, Hong Kong Tourism Board, OpenRice and Sassy Hong Kong was blocked by the cloud environment's network policy. The site prominently discloses this, and its reading list is explicitly not presented as supporting citations.
+## Website and publishing
 
-Addresses, branch operating status, coordinates, price estimates, current menus and publication coverage still need verification. No current awards, opening hours or checked restaurant recommendations are asserted. Approximate map pins and estimated walks are not routed directions.
+The GitHub Pages project site is **https://williamlow.github.io/hongkong-trip/**.
 
-The required source, map and GitHub API domains have been saved to the cloud environment configuration draft. They must be saved/applied through environment settings before research and Pages administration can continue. Environment publication is separate from deploying the website to GitHub Pages.
+The repository is configured to publish **`main` → `/`**, and the site works directly as static files in that location. `.nojekyll` disables Jekyll processing. No framework build, API key, server, CDN script or font service is required for visitors; Leaflet is vendored with its license. Map tiles come from OpenStreetMap and retain attribution. Google Maps and editorial sources are external links.
+
+GitHub's built-in `pages-build-deployment` workflow publishes pushes to `main`. The separate `.github/workflows/pages.yml` checks installation, the static build and browser tests. It does not try to change Pages settings. Confirm the Pages deployment and the public site after publishing; pushing source alone does not prove a successful deployment.
 
 ## Develop
 
-Requires Node.js 24 and npm. No app secrets or backend are required.
+Use the existing checkout; each cloud task is already isolated, so no extra worktree is needed. Node.js 24 and npm are the development prerequisites.
 
 ```sh
 npm ci
 npm run dev
 ```
 
-Use the existing checkout; each cloud task is already isolated. No additional worktree is needed.
+The development command serves the repository's static site. To prepare and serve a standalone output folder:
 
 ```sh
 npm run build
 npm run preview
 ```
 
-The build writes `dist/`, uses relative asset paths and works under a GitHub Pages repository path such as `/hongkong-trip/`.
+The build copies the public site files and vendored Leaflet into `dist/`. All resource URLs are relative, so the same files work under `/hongkong-trip/`.
 
 ## Validate
 
@@ -37,29 +39,15 @@ npm run build
 npm test
 ```
 
-The test configuration uses `/usr/bin/chromium` when present and Playwright's browser otherwise. Existing tests cover filtering, search including Chinese names, saved-place persistence and unavailable storage, exact-branch map links, map/card selection, the week plan, tile failure and mobile overflow. These validate software behaviour, not restaurant facts.
+The test configuration uses `/usr/bin/chromium` when present and Playwright's browser otherwise. Tests cover data/citation integrity, Chinese-name and dish search, combined filters, hotel walks, saved-place persistence and unavailable storage, exact-branch Google Maps queries, card/map selection, week-plan links, blocked map tiles, mobile overflow and hosting under a project subdirectory. Software checks do not establish that a restaurant is open today.
 
-Map tiles are requested from `tile.openstreetmap.org`. The map gives an explicit fallback message if tiles cannot load; numbered pins, cards and Google Maps links remain usable. Leaflet itself is bundled, and no font or image CDN is required.
+## Update the guide
 
-## GitHub Pages
+- Edit `data.js` for restaurants, citations, hotel details and day plans. Preserve stable restaurant IDs so saved favourites continue to work.
+- Add direct coverage links for recommendations; distinguish editorial evidence from address/operating-status directory checks. Record publication/access dates and flag older sources.
+- Check the exact branch and coordinates before changing an address. Kai Kai, Wang Fu and Keung Kee illustrate why older articles need cross-checks.
+- Keep prices labelled as estimates unless quoting a checked current menu. Avoid listing fixed opening hours without a reliable current source.
+- Edit `app.js`, `index.html` and `styles.css` for the interface. `vendor/leaflet/` comes from the pinned Leaflet 1.9.4 npm package and includes its license.
+- Rebuild and run tests before pushing. GitHub Pages publishes the root files, while `dist/` is an ignored verification/export output.
 
-`.github/workflows/pages.yml` installs dependencies, builds, runs browser tests and deploys `dist/` on pushes to `main`.
-
-The repository's **Settings → Pages → Build and deployment → Source** must be **GitHub Actions**. If it is not enabled, an authorised administrator can enable it with:
-
-```sh
-gh api --method POST repos/williamlow/hongkong-trip/pages -f build_type=workflow
-```
-
-For an existing Pages site, use the supported update endpoint instead of creating a duplicate. A successful workflow deployment, not merely pushing source, establishes that the site is live. The expected project-site URL is `https://williamlow.github.io/hongkong-trip/`; it must be verified after deployment.
-
-## Finish the research
-
-1. Read broad cheap-eats, local-food and neighbourhood coverage in the named publications; add other authoritative local sources as useful.
-2. Match each entry to the exact branch and check recent evidence that it operates. Remove closed, relocated, duplicate or poorly matched candidates.
-3. Keep editorial recommendation evidence separate from factual address/menu checks. Record article URL, title, publisher, access date and the specific supported facts.
-4. Update `data.js`, add article-level source links to the cards, and replace the pending-research language only after the research has actually been done.
-5. Recheck map coordinates, nearby classification and any walk estimates. Keep price estimates labelled unless supported by current menus.
-6. Rebuild, run browser tests, push and verify the deployed Pages URL.
-
-`data.js` contains hotel, candidate, reading-list and day-plan data. `app.js` handles rendering and map/filter interactions. `styles.css` is the responsive design. Favourites are stored only in the visitor's browser; there is no analytics or tracking.
+Saved places use only browser local storage. There is no account system, analytics or tracking. Map-tile failures show an explicit message; cards, numbered pins and Google Maps links remain usable.

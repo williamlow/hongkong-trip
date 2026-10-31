@@ -1707,3 +1707,49 @@ footer > a:last-child {
     display: none;
   }
 }
+.card-sources {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px 11px;
+  margin: 0 0 14px;
+  font-size: 10px;
+  line-height: 1.7;
+}
+.card-sources > span {
+  font-size: 8px;
+  letter-spacing: 1.2px;
+  color: var(--muted);
+  flex-basis: 100%;
+}
+.card-sources a {
+  color: var(--red);
+  text-decoration: underline;
+  text-decoration-color: #cfb1a0;
+  text-underline-offset: 3px;
+}
+.card-sources a:hover {
+  text-decoration-color: var(--red);
+}
+.draft-tag {
+  color: var(--ink);
+  border-color: #9da88d;
+}
+.source-grid em {
+  color: #4d654b;
+}
+.research-notice {
+  background: #e9ece2;
+}
+.research-notice p {
+  color: #5b6655;
+}
+.research-notice strong {
+  color: var(--ink);
+}
+@media (max-width: 600px) {
+  .card-sources {
+    font-size: 12px;
+    gap: 9px 14px;
+  }
+}

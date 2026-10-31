@@ -3,6 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./vendor/leaflet/leaflet.css" />
+    <link rel="stylesheet" href="./styles.css" />
     <meta name="theme-color" content="#f7f4ec" />
     <meta
       name="description"
@@ -104,7 +106,7 @@
         </div>
       </section>
       <div class="guide-stats">
-        <span><strong id="total-count">30</strong> local-food candidates</span
+        <span><strong id="total-count">34</strong> local food stops</span
         ><span><strong id="near-count">—</strong> close to your hotel</span
         ><span><strong>HK$20–170</strong> most individual orders</span
         ><span class="stats-last"
@@ -114,11 +116,10 @@
       <aside class="research-notice" role="note">
         <span class="notice-symbol">i</span>
         <p>
-          <strong>A working notebook, not a live-checked guide.</strong>
-          Research access is currently blocked. These are provisional candidates
-          from general knowledge; the publications below have not yet been read
-          for this guide. Branches, operating status, menus, prices and map pins
-          need verification before a special trip.
+          <strong>Researched for your week in Hong Kong.</strong>
+          Follow “Read why” on each card for the original coverage. Budgets are
+          estimates, not menu prices; check current opening before you go. Most
+          stops are simple cafes, noodle shops and snack counters.
         </p>
       </aside>
       <section
@@ -201,7 +202,7 @@
             </div>
             <div
               id="map"
-              aria-label="Interactive map of restaurant candidates and Eaton HK"
+              aria-label="Interactive map of restaurant stops and Eaton HK"
             ></div>
             <p class="map-error" id="map-error" hidden>
               Map tiles are unavailable. Numbered pins still work; each place
@@ -282,21 +283,27 @@
             <p class="eyebrow">THE READING LIST</p>
             <h2 id="sources-title">Good food needs good sources.</h2>
           </div>
-          <span class="draft-tag">RESEARCH PENDING</span>
+          <span class="draft-tag">CHECKED 31 OCT 2026</span>
         </div>
         <p class="source-intro">
-          These are the intended starting points for a broad editorial search,
-          not citations supporting the current candidates. Network restrictions
-          prevented reading them. No current award, review, opening status or
-          price is claimed. A finished research pass should add article-level
-          citations to each restaurant, compare independent recommendations and
-          verify the exact branch.
+          Drawn from Eater’s local expert guide, The Infatuation’s 2025 reviews,
+          MICHELIN’s 2026 branch listings, and Sassy’s food and neighbourhood
+          guides. We kept the casual Hong Kong and Chinese meals, with plenty of
+          small-bill options. OpenRice helped check exact branches; the tourism
+          board supplied neighbourhood context. Every restaurant links to its
+          supporting coverage. This is desk research, not a claim of personal
+          visits.
         </p>
         <div class="source-grid" id="source-grid"></div>
         <p class="source-footnote">
-          Draft assembled 31 October 2026 · Budget estimates and approximate
-          locations are unverified · No paid placements · Saved places stay in
-          this browser.
+          Sources read 31 October 2026 · Older coverage is flagged where
+          relevant · Budgets and walking times are estimates · Map pins are
+          approximate · No paid placements · Saved places stay in this browser.
+        </p>
+        <p class="source-footnote">
+          Time Out was also requested and attempted, but access remained denied;
+          no recommendations here are attributed to it. Opening hours can
+          change: use the branch-specific Google Maps link before heading out.
         </p>
       </section>
     </main>
@@ -308,6 +315,7 @@
       <a href="#explore">Back to the shortlist ↑</a>
     </footer>
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
-    <script type="module" src="/app.js"></script>
+    <script src="./vendor/leaflet/leaflet.js"></script>
+    <script type="module" src="./app.js"></script>
   </body>
 </html>

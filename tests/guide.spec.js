@@ -1,9 +1,9 @@
 import { test, expect } from "@playwright/test";
 import { restaurants, hotel } from "../data.js";
 
-test("every candidate has a unique ID, useful price range, HK coordinates and an address", () => {
-  expect(restaurants).toHaveLength(30);
-  expect(new Set(restaurants.map((r) => r.id)).size).toBe(30);
+test("every researched stop has citations, a unique ID, useful price range, HK coordinates and an address", () => {
+  expect(restaurants).toHaveLength(34);
+  expect(new Set(restaurants.map((r) => r.id)).size).toBe(34);
   for (const r of restaurants) {
     expect(r.address.length).toBeGreaterThan(5);
     expect(r.lat).toBeGreaterThan(22.2);
@@ -12,8 +12,14 @@ test("every candidate has a unique ID, useful price range, HK coordinates and an
     expect(r.lng).toBeLessThan(114.3);
     expect(r.low).toBeLessThan(r.high);
     expect(r.order.length).toBeGreaterThan(10);
-    expect(r.verification).toBe("pending");
-    expect(r.citations).toEqual([]);
+    expect(r.verification).toBe("researched");
+    expect(r.citations.length).toBeGreaterThan(0);
+    expect(r.checkedOn).toBe("2026-10-31");
+    for (const source of r.citations) {
+      expect(new URL(source.url).protocol).toBe("https:");
+      expect(source.publisher.length).toBeGreaterThan(3);
+      expect(source.title.length).toBeGreaterThan(5);
+    }
   }
   expect(hotel.name).toBe("Eaton HK");
 });
@@ -28,10 +34,14 @@ test("renders all restaurants, hotel and map markers with no runtime errors", as
   const errors = [];
   page.on("pageerror", (e) => errors.push(e.message));
   await page.reload();
-  await expect(page.locator(".restaurant-card")).toHaveCount(30);
-  await expect(page.locator(".food-marker")).toHaveCount(30);
+  await expect(page.locator(".restaurant-card")).toHaveCount(
+    restaurants.length,
+  );
+  await expect(page.locator(".food-marker")).toHaveCount(restaurants.length);
   await expect(page.locator(".hotel-marker")).toHaveCount(1);
-  await expect(page.locator("#total-count")).toHaveText("30");
+  await expect(page.locator("#total-count")).toHaveText(
+    String(restaurants.length),
+  );
   expect(errors).toEqual([]);
 });
 
@@ -53,6 +63,8 @@ test("food and neighbourhood filters combine and empty results can reset", async
 }) => {
   await page.locator("#area").selectOption("Jordan");
   await page.getByRole("button", { name: "Sweet things", exact: true }).click();
+  await expect(page.locator(".restaurant-card")).toHaveCount(2);
+  await page.getByRole("searchbox").fill("Kai Kai");
   await expect(page.locator(".restaurant-card")).toHaveCount(1);
   await expect(page.locator(".restaurant-card h3")).toHaveText(
     "Kai Kai Dessert",
@@ -61,7 +73,9 @@ test("food and neighbourhood filters combine and empty results can reset", async
   await expect(page.locator("#empty")).toBeVisible();
   await expect(page.locator(".food-marker")).toHaveCount(0);
   await page.getByRole("button", { name: "Clear filters" }).click();
-  await expect(page.locator(".restaurant-card")).toHaveCount(30);
+  await expect(page.locator(".restaurant-card")).toHaveCount(
+    restaurants.length,
+  );
 });
 
 test("Near Eaton excludes distant places and offers walking directions from the hotel", async ({
@@ -132,14 +146,14 @@ test("price sort changes the list and week-plan buttons open the right restauran
   await page.locator("#sort").selectOption("price");
   await expect(
     page.locator(".restaurant-card").first().locator("h3"),
-  ).toHaveText("Kwan Kee Store");
+  ).toHaveText("Mrs. Fong Chinese Desserts");
   await page
     .locator("#week")
-    .getByRole("button", { name: "Joy Hing Roasted Meat" })
+    .getByRole("button", { name: "Kam’s Roast Goose" })
     .click();
   await expect(page.locator(".restaurant-card")).toHaveCount(1);
   await expect(page.locator(".restaurant-card h3")).toHaveText(
-    "Joy Hing Roasted Meat",
+    "Kam’s Roast Goose",
   );
 });
 
@@ -151,8 +165,10 @@ test("blocked map tiles display a useful fallback without breaking the list", as
   );
   await page.reload();
   await expect(page.locator("#map-error")).toBeVisible();
-  await expect(page.locator(".food-marker")).toHaveCount(30);
-  await expect(page.locator(".restaurant-card")).toHaveCount(30);
+  await expect(page.locator(".food-marker")).toHaveCount(restaurants.length);
+  await expect(page.locator(".restaurant-card")).toHaveCount(
+    restaurants.length,
+  );
 });
 
 test("unavailable browser storage does not prevent browsing or saving for the visit", async ({
@@ -242,11 +258,46 @@ test("production assets work under the nested GitHub Pages project path", async 
   });
   try {
     await page.goto(`http://127.0.0.1:${server.address().port}/hongkong-trip/`);
-    await expect(page.locator(".restaurant-card")).toHaveCount(30);
+    await expect(page.locator(".restaurant-card")).toHaveCount(
+      restaurants.length,
+    );
     await page.getByRole("searchbox").fill("Kai Kai");
     await expect(page.locator(".restaurant-card")).toHaveCount(1);
     expect(missing).toEqual([]);
   } finally {
-    await new Promise((done) => server.close(done));
+    const closed = new Promise((done) => server.close(done));
+    server.closeAllConnections();
+    await closed;
   }
+});
+
+test("source links are visible on every card and relocated restaurants use their current branches", async ({
+  page,
+}) => {
+  await expect(page.locator(".card-sources")).toHaveCount(restaurants.length);
+  for (const id of ["kai-kai", "wang-fu", "keung-kee"]) {
+    const restaurant = restaurants.find((r) => r.id === id);
+    const card = page.locator(`#place-${id}`);
+    await expect(card.locator(".card-address")).toContainText(
+      restaurant.address,
+    );
+    const href = await card
+      .getByRole("link", { name: "Google Maps", exact: false })
+      .getAttribute("href");
+    expect(new URL(href).searchParams.get("query")).toContain(
+      restaurant.address,
+    );
+    await expect(card.locator(".card-sources a")).toHaveCount(
+      restaurant.citations.length,
+    );
+  }
+  await expect(page.locator("#place-kai-kai .card-address")).toContainText(
+    "113–115 Parkes Street",
+  );
+  await expect(page.locator("#place-wang-fu .card-address")).toContainText(
+    "168 Wellington Street",
+  );
+  await expect(page.locator("#place-keung-kee .card-address")).toContainText(
+    "406 Lockhart Road",
+  );
 });
