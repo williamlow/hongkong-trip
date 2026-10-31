@@ -2,13 +2,13 @@ import { test, expect } from "@playwright/test";
 import { restaurants, hotel } from "../data.js";
 
 test("every researched stop has citations, a unique ID, useful price range, HK coordinates and an address", () => {
-  expect(restaurants).toHaveLength(34);
-  expect(new Set(restaurants.map((r) => r.id)).size).toBe(34);
+  expect(restaurants).toHaveLength(48);
+  expect(new Set(restaurants.map((r) => r.id)).size).toBe(48);
   for (const r of restaurants) {
     expect(r.address.length).toBeGreaterThan(5);
     expect(r.lat).toBeGreaterThan(22.2);
-    expect(r.lat).toBeLessThan(22.4);
-    expect(r.lng).toBeGreaterThan(114.1);
+    expect(r.lat).toBeLessThan(22.6);
+    expect(r.lng).toBeGreaterThan(113.8);
     expect(r.lng).toBeLessThan(114.3);
     expect(r.low).toBeLessThan(r.high);
     expect(r.order.length).toBeGreaterThan(10);
@@ -55,7 +55,7 @@ test("search finds dishes and Chinese names and keeps markers in sync", async ({
     "Australia Dairy Company",
   );
   await page.getByRole("searchbox").fill("shrimp roe");
-  await expect(page.locator(".restaurant-card")).toHaveCount(2);
+  await expect(page.locator(".restaurant-card")).toHaveCount(4);
 });
 
 test("food and neighbourhood filters combine and empty results can reset", async ({
@@ -146,7 +146,7 @@ test("price sort changes the list and week-plan buttons open the right restauran
   await page.locator("#sort").selectOption("price");
   await expect(
     page.locator(".restaurant-card").first().locator("h3"),
-  ).toHaveText("Mrs. Fong Chinese Desserts");
+  ).toHaveText("Ki Tsui");
   await page
     .locator("#week")
     .getByRole("button", { name: "Kam’s Roast Goose" })
@@ -325,4 +325,41 @@ test("all filtered map pins stay in view when the screen narrows", async ({
       }),
     )
     .toBe(true);
+});
+
+test("the new-places filter shows the 14 additions and combines with food filters", async ({
+  page,
+}) => {
+  await page.locator("#new-toggle").click();
+  await expect(page.locator(".restaurant-card")).toHaveCount(14);
+  await expect(page.locator(".new-label")).toHaveCount(14);
+  await page.getByRole("button", { name: "Congee", exact: true }).click();
+  await expect(page.locator(".restaurant-card")).toHaveCount(1);
+  await expect(page.locator(".restaurant-card h3")).toHaveText(
+    "Trusty Congee King",
+  );
+  await page.getByRole("searchbox").fill("nothingmatches");
+  await page.getByRole("button", { name: "Clear filters" }).click();
+  await expect(page.locator("#new-toggle")).toHaveAttribute(
+    "aria-pressed",
+    "false",
+  );
+  await expect(page.locator(".restaurant-card")).toHaveCount(48);
+});
+
+test("food and racing pages link to each other and the Happy Valley food link filters the exact area", async ({
+  page,
+}) => {
+  await page
+    .getByRole("navigation", { name: "Main navigation" })
+    .getByRole("link", { name: "Happy Valley", exact: true })
+    .click();
+  await expect(page).toHaveURL(/racing.html$/);
+  await page
+    .getByRole("link", { name: "See the Happy Valley food stop" })
+    .click();
+  await expect(page.locator(".restaurant-card")).toHaveCount(1);
+  await expect(page.locator(".restaurant-card h3")).toHaveText(
+    "Cheung Hing Coffee Shop",
+  );
 });

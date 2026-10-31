@@ -9,6 +9,11 @@ for (const path of [
   "app.js",
   "data.js",
   "styles.css",
+  "racing.html",
+  "racing.css",
+  "racing.js",
+  "racing-data.js",
+  "race-engine.js",
   "vendor",
   ".nojekyll",
 ]) {

@@ -1,8 +1,12 @@
 # One More Bite — Hong Kong food notebook
 
-A simple, mobile-friendly guide to 34 casual Hong Kong and Chinese food stops, based at Eaton HK in Jordan. Includes a Leaflet/OpenStreetMap map, branch-specific Google Maps links, estimated walks from the hotel, search and food/neighbourhood filters, saved places and a flexible seven-day plan.
+A simple, mobile-friendly guide to 48 casual Hong Kong and Chinese food stops, based at Eaton HK in Jordan. Includes a Leaflet/OpenStreetMap map, branch-specific Google Maps links, estimated walks from the hotel, search and food/neighbourhood filters, saved places and a flexible seven-day plan.
 
 Research was checked on **31 October 2026** against Eater, The Infatuation, the 2026 MICHELIN Guide, Sassy Hong Kong and OpenRice, with tourism-board neighbourhood background. Every restaurant has article or listing links. See [RESEARCH.md](RESEARCH.md) for methodology, source scope, corrections and limitations. Prices are planning estimates, not current menu quotes; maps and walks are approximate. This is desk research, not a claim of personal visits.
+
+The top navigation also links to `racing.html`: an introduction to Hong Kong and Happy Valley racing, a visitor plan, terminology, basic bet types and a Willy-versus-Gilly mini race. The game makes a new independent 50/50 winner draw each time, animates two laps, supports replay and honours reduced-motion preferences.
+
+The expansion added 14 food stops, tagged **NEW** and accessible through the new-places filter. Recent Reddit threads were requested but the running environment still blocks Reddit. The racing guide uses Sassy’s August 2026 visitor article and links to HKJC; exact fixture dates remain unconfirmed until official access is applied. See [RACING_RESEARCH.md](RACING_RESEARCH.md). No unverified dates are presented as confirmed meetings.
 
 ## Website and publishing
 
@@ -47,7 +51,7 @@ The test configuration uses `/usr/bin/chromium` when present and Playwright's br
 - Add direct coverage links for recommendations; distinguish editorial evidence from address/operating-status directory checks. Record publication/access dates and flag older sources.
 - Check the exact branch and coordinates before changing an address. Kai Kai, Wang Fu and Keung Kee illustrate why older articles need cross-checks.
 - Keep prices labelled as estimates unless quoting a checked current menu. Avoid listing fixed opening hours without a reliable current source.
-- Edit `app.js`, `index.html` and `styles.css` for the interface. `vendor/leaflet/` comes from the pinned Leaflet 1.9.4 npm package and includes its license.
+- Edit `app.js`, `index.html` and `styles.css` for the food interface. `racing.html`, `racing.css` and `racing.js` contain the racing guide; `race-engine.js` holds the random draw and animation progress logic. `racing-data.js` only accepts independently verified official fixtures, with an explicit check date. `vendor/leaflet/` comes from the pinned Leaflet 1.9.4 npm package and includes its license.
 - Rebuild and run tests before pushing. GitHub Pages publishes the root files, while `dist/` is an ignored verification/export output.
 
 Saved places use only browser local storage. There is no account system, analytics or tracking. Map-tile failures show an explicit message; cards, numbered pins and Google Maps links remain usable.
