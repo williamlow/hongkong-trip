@@ -315,5 +315,8 @@ $("#source-grid").innerHTML = sources
   )
   .join("");
 render();
-const resizeObserver = new ResizeObserver(() => map.invalidateSize());
+const resizeObserver = new ResizeObserver(() => {
+  map.invalidateSize({ pan: false });
+  fitMap();
+});
 resizeObserver.observe($("#map"));

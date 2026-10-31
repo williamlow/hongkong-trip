@@ -301,3 +301,28 @@ test("source links are visible on every card and relocated restaurants use their
     "406 Lockhart Road",
   );
 });
+
+test("all filtered map pins stay in view when the screen narrows", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1440, height: 1050 });
+  await page.locator("#near-toggle").click();
+  await page.setViewportSize({ width: 390, height: 844 });
+  await expect
+    .poll(() =>
+      page.evaluate(() => {
+        const map = document.querySelector("#map").getBoundingClientRect();
+        return Array.from(
+          document.querySelectorAll(".food-marker-wrap, .hotel-marker-wrap"),
+        ).every((marker) => {
+          const pin = marker.getBoundingClientRect();
+          const x = pin.left + pin.width / 2;
+          const y = pin.top + pin.height / 2;
+          return (
+            x >= map.left && x <= map.right && y >= map.top && y <= map.bottom
+          );
+        });
+      }),
+    )
+    .toBe(true);
+});
