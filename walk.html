@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f7f4ec" />
+    <meta
+      name="description"
+      content="A digitised ten-stop Kowloon walk from your Lonely Planet page, with independent background, six optional detours, an updated interactive map and Google Maps walking links."
+    />
+    <title>Walk Kowloon · One More Bite</title>
+    <link rel="stylesheet" href="./vendor/leaflet/leaflet.css" />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./walk.css" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Crect width='80' height='80' rx='20' fill='%23273b32'/%3E%3Ctext x='40' y='55' text-anchor='middle' font-size='44' fill='%23fff' font-family='serif'%3E行%3C/text%3E%3C/svg%3E"
+    />
+  </head>
+  <body>
+    <a class="skip-link" href="#walk-route">Skip to the walking route</a>
+    <header class="site-header">
+      <a class="brand" href="./index.html"
+        ><span class="brand-stamp" lang="zh-Hant">食</span
+        ><span
+          >ONE MORE BITE<span class="brand-sub"
+            >HONG KONG FIELD NOTES</span
+          ></span
+        ></a
+      >
+      <nav aria-label="Main navigation">
+        <a href="./index.html#explore">Food guide</a
+        ><a href="./racing.html">Happy Valley</a
+        ><a href="./walk.html" aria-current="page">Kowloon walk</a>
+      </nav>
+      <a
+        class="hotel-link"
+        id="walk-hotel-link"
+        target="_blank"
+        rel="noopener noreferrer"
+        ><span class="status-dot"></span> BASE: EATON HK
+        <span aria-hidden="true">↗</span></a
+      >
+    </header>
+    <main>
+      <section class="walk-hero" aria-labelledby="walk-title">
+        <div>
+          <p class="eyebrow">WALK KOWLOON / 九龍慢行</p>
+          <h1 id="walk-title">Kowloon,<br /><em>one stop at a time.</em></h1>
+          <p class="walk-intro">
+            Art by the harbour. A bowl of noodles. Old market streets.<br />Your
+            photographed walking tour, digitised for a day on foot.
+          </p>
+          <a class="explore-link" href="#walk-route"
+            >Open the updated map <span aria-hidden="true">↓</span></a
+          >
+        </div>
+        <aside class="walk-notebook">
+          <p class="eyebrow">FROM YOUR PAGE TO THE PAVEMENT</p>
+          <div class="notebook-count">
+            <strong>10</strong
+            ><span>original stops<br />in the book’s order</span>
+          </div>
+          <p>
+            Plus <strong>6 optional detours</strong>, new background notes and a
+            harbour crossing you can choose to include.
+          </p>
+          <dl>
+            <div>
+              <dt>Start</dt>
+              <dd>Hong Kong Museum of Art</dd>
+            </div>
+            <div>
+              <dt>Finish</dt>
+              <dd>Avenue of Stars</dd>
+            </div>
+            <div>
+              <dt>On foot</dt>
+              <dd id="walk-distance">A full Kowloon loop</dd>
+            </div>
+            <div>
+              <dt>Make time for</dt>
+              <dd>A full day with the ferry & evening lights</dd>
+            </div>
+          </dl>
+          <small
+            >Numbers 1–10 match your photograph. Letters A–F are additions. This
+            is an independent adaptation, not an official Lonely Planet
+            update.</small
+          >
+        </aside>
+      </section>
+      <nav class="page-nav" aria-label="Walking guide sections">
+        <a href="#walk-route">Map & ten stops</a
+        ><a href="#detours">Optional detours</a
+        ><a href="#timing">Make the timing work</a
+        ><a href="#walk-sources">Sources & route notes</a>
+      </nav>
+      <section class="walk-notes" aria-label="Important route updates">
+        <article>
+          <span>THE WAFFLE STOP</span>
+          <p>
+            “North Point” is in the shop’s name. Use the
+            <strong>Tsim Sha Tsui branch at 178 Nathan Road</strong> for this
+            walk.
+          </p>
+        </article>
+        <article>
+          <span>THE KITCHENWARE STRETCH</span>
+          <p>
+            Stop 8 is the
+            <strong>Yau Ma Tei stretch of Shanghai Street</strong>. The 618
+            redevelopment in Mong Kok is farther north.
+          </p>
+        </article>
+        <article>
+          <span>A DAYTIME FRUIT-MARKET VISIT</span>
+          <p>
+            Wholesale trading is strongest
+            <strong>overnight and early morning</strong>. In the afternoon, come
+            for the streets and historic buildings.
+          </p>
+        </article>
+      </section>
+      <section
+        class="walk-section"
+        id="walk-route"
+        aria-labelledby="route-title"
+      >
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">THE ORIGINAL ROUTE, WITH NEW CONTEXT</p>
+            <h2 id="route-title">Ten stops. A city’s worth of stories.</h2>
+          </div>
+          <p>Tap a stop to read more.<br />Tap a pin to find it on the page.</p>
+        </div>
+        <div class="walk-progress-bar">
+          <div>
+            <strong id="walk-progress" role="status" aria-live="polite"
+              >0 of 10 book stops visited</strong
+            ><span>Your progress stays in this browser.</span>
+          </div>
+          <div class="walk-progress-actions">
+            <button id="expand-stops" aria-expanded="false">
+              Expand all stops</button
+            ><button id="reset-walk">Clear visited</button>
+          </div>
+        </div>
+        <progress
+          id="walk-progress-meter"
+          max="10"
+          value="0"
+          aria-label="Original walking stops visited"
+        ></progress>
+        <div class="walk-layout">
+          <div class="walk-stop-list" id="walk-stop-list"></div>
+          <aside
+            class="walk-map-panel"
+            aria-label="Updated Kowloon walking map"
+          >
+            <div class="map-heading">
+              <span class="eyebrow">YOUR UPDATED WALKING MAP</span
+              ><button id="fit-walk-map">Show all ↗</button>
+            </div>
+            <div class="walk-map-options">
+              <label
+                ><input type="checkbox" id="show-detours" checked /> Show A–F
+                detours</label
+              ><label
+                ><input type="checkbox" id="show-ferry" /> Show ferry
+                excursion</label
+              >
+            </div>
+            <div
+              id="walk-map"
+              aria-label="Interactive map of the ten Kowloon walking stops, six optional detours and Eaton HK"
+            ></div>
+            <p id="walk-map-error" class="map-error" hidden>
+              Map tiles are unavailable. The route and numbered pins still work;
+              use the Google Maps links for navigation.
+            </p>
+            <div class="walk-map-legend">
+              <span
+                ><i class="walk-legend-dot original"></i> Book stops 1–10</span
+              ><span><i class="walk-legend-dot extra"></i> Extra stops A–F</span
+              ><span><i class="walk-legend-dot hotel"></i> Eaton HK</span>
+            </div>
+            <p class="walk-map-note">
+              Walking lines follow an approximate street/park corridor, not a
+              live routing service. The ferry line is schematic. Use the walking
+              links below for current crossings and access.
+            </p>
+            <div class="walk-map-footer">
+              <a id="start-from-eaton" target="_blank" rel="noopener noreferrer"
+                >Walk from Eaton to stop 1 ↗</a
+              ><button id="download-walk">Download map · KML ↓</button>
+            </div>
+          </aside>
+        </div>
+        <div class="walk-navigation" aria-labelledby="directions-title">
+          <div>
+            <p class="eyebrow">TAKE THE NEXT SECTION WITH YOU</p>
+            <h3 id="directions-title">Google Maps walking directions.</h3>
+            <p>
+              Split into three sections so intermediate stops fit mobile Google
+              Maps. Add the optional detours individually; they are not silently
+              folded into these links.
+            </p>
+          </div>
+          <div id="walk-directions"></div>
+        </div>
+      </section>
+      <section
+        class="walk-section"
+        id="detours"
+        aria-labelledby="detours-title"
+      >
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">MAKE THE WALK YOUR OWN</p>
+            <h2 id="detours-title">Six worthwhile little detours.</h2>
+          </div>
+          <p>
+            Near the route, not six more obligations.<br />Pick the ones that
+            catch your eye.
+          </p>
+        </div>
+        <div class="walk-detour-grid" id="walk-detours"></div>
+      </section>
+      <section
+        class="walk-section walk-timing"
+        id="timing"
+        aria-labelledby="timing-title"
+      >
+        <div>
+          <p class="eyebrow">A WALK THAT WORKS AS A DAY</p>
+          <h2 id="timing-title">Leave room<br />for the harbour.</h2>
+          <p>
+            Think of this as a full-day wander. The moving time is much shorter
+            than the day: museums, lunch, market browsing, queues and the ferry
+            fill the gaps. Reaching the 8pm lights may mean a pause for dinner.
+          </p>
+          <p id="moving-time"></p>
+        </div>
+        <ol>
+          <li>
+            <span>MORNING</span>
+            <h3>Art, park, then a snack.</h3>
+            <p>
+              Start at the Museum of Art, wander through Kowloon Park, then
+              follow stops 3–4 toward Jordan. Check the museum’s opening day and
+              exhibition arrangements before setting off.
+            </p>
+          </li>
+          <li>
+            <span>LUNCH & AFTERNOON</span>
+            <h3>Browse the old market streets.</h3>
+            <p>
+              Take your time around the Jade Market, Tin Hau Temple,
+              fruit-market exterior and Shanghai Street. The Jade Market is a
+              daytime market; Temple Street’s evening stalls are a different
+              experience.
+            </p>
+          </li>
+          <li>
+            <span>AROUND DUSK</span>
+            <h3>Cross the harbour, if you fancy.</h3>
+            <p>
+              The photographed itinerary includes a ferry outing after stop 9. A
+              Tsim Sha Tsui–Central return trip is a straightforward version;
+              allow time for two crossings, waiting and boarding. Check the
+              operator’s current timetable and weather notices.
+            </p>
+          </li>
+          <li>
+            <span>8PM · HONG KONG TIME</span>
+            <h3>Avenue of Stars and the skyline.</h3>
+            <p>
+              The published usual start of A Symphony of Lights is 8pm. The
+              promenade around the Cultural Centre and Avenue of Stars offers
+              harbour views; bad weather or announcements can cancel the show.
+              Check the current notice rather than treating it as guaranteed.
+            </p>
+          </li>
+        </ol>
+      </section>
+      <section
+        class="walk-section"
+        id="walk-sources"
+        aria-labelledby="walk-sources-title"
+      >
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">WHERE THE ROUTE AND STORIES CAME FROM</p>
+            <h2 id="walk-sources-title">A book route, freshly annotated.</h2>
+          </div>
+        </div>
+        <p class="walk-source-intro">
+          The ten names, order and ferry idea come from your photograph of
+          Lonely Planet’s “Walk Kowloon” page. Background, practical notes and
+          A–F detours are independently written using the linked Tourism Board,
+          local-guide and branch sources. The new map uses OpenStreetMap, with
+          approximate street geometry and sourced landmark locations. The
+          photographed map and prose have not been reproduced.
+        </p>
+        <div class="source-grid" id="walk-source-grid"></div>
+        <details class="route-disclosure">
+          <summary>Route accuracy, timing and what has changed</summary>
+          <div>
+            <p>
+              The photo does not show the book’s edition or publication date. We
+              have preserved its ten-stop numbering while matching current
+              branch/place descriptions where available. Street lines and
+              distances are planning estimates; they do not certify a step-free
+              route or current access through a park, building or crossing.
+            </p>
+            <p>
+              The theatre detour is exterior-only: the Tourism Board page
+              currently carries a closure/construction notice. Shanghai Street
+              is represented by its Yau Ma Tei kitchenware section, not by 618
+              Shanghai Street. The fruit-market pin is the wholesale complex
+              near Waterloo Road, not a similarly named fruit shop farther
+              south. No fixed shop, temple or museum opening hours are assumed.
+            </p>
+            <p>
+              The KML download contains all ten book stops, six detours, Eaton
+              and the Central ferry endpoint, plus the approximate walking line
+              and optional ferry line. It can be imported into compatible map
+              tools such as Google My Maps or Google Earth. It does not provide
+              live navigation.
+            </p>
+          </div>
+        </details>
+        <p class="source-footnote">
+          Background and map checked 1 November 2026 · Opening hours, shows,
+          shops and ferry services can change · No affiliation with Lonely
+          Planet · Visited stops are stored only in your browser.
+        </p>
+      </section>
+    </main>
+    <footer>
+      <a class="footer-brand" href="./index.html"
+        >ONE MORE BITE <span lang="zh-Hant">食好啲</span></a
+      >
+      <p>Hong Kong field notes. A little further on foot.</p>
+      <a href="#walk-title">Back to the top ↑</a>
+    </footer>
+    <div id="walk-toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="./vendor/leaflet/leaflet.js"></script>
+    <script type="module" src="./walk.js"></script>
+  </body>
+</html>

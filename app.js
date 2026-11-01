@@ -141,7 +141,11 @@ function fitMap() {
     [hotel.lat, hotel.lng],
     ...visible.map((r) => [r.lat, r.lng]),
   ];
-  map.fitBounds(L.latLngBounds(points), { padding: [35, 35], maxZoom: 15 });
+  map.fitBounds(L.latLngBounds(points), {
+    padding: [35, 35],
+    maxZoom: 15,
+    animate: false,
+  });
 }
 function card(r) {
   return `<article class="restaurant-card ${state.selected === r.id ? "selected" : ""}" id="place-${r.id}" data-id="${r.id}"><div class="card-top"><span class="place-number">${String(r.number).padStart(2, "0")}</span><div class="card-location">${escape(r.area)} <span> / </span> ${escape(r.category)}${r.addedIn ? `<span class="new-label">NEW</span>` : ""}</div><button class="save-button ${saved.has(r.id) ? "is-saved" : ""}" data-save="${r.id}" aria-label="${saved.has(r.id) ? "Unsave" : "Save"} ${escape(r.name)}" aria-pressed="${saved.has(r.id)}">${saved.has(r.id) ? "♥" : "♡"}</button></div><div class="card-title"><h3><button data-locate="${r.id}" title="Show ${escape(r.name)} on the map">${escape(r.name)}</button></h3><span lang="zh-Hant">${escape(r.chinese)}</span></div><div class="card-tags"><span class="budget">HK$${r.low}–${r.high} <small>est.</small></span><span>${escape(r.meal)}</span>${r.near ? `<span class="near-badge">⌂ ~${r.walk} min walk</span>` : ""}</div><p class="card-description">${escape(r.description)}</p><div class="order-box"><span>COME FOR</span><p>${escape(r.order)}</p></div><p class="card-tip">${escape(r.tip)}</p><div class="card-address">${escape(r.address)} · ${escape(r.area)}</div><div class="card-sources"><span>READ WHY</span>${r.citations.map((c) => `<a href="${escape(c.url)}" target="_blank" rel="noopener noreferrer" title="${escape(c.title)}${c.published ? ` · ${escape(c.published)}` : ``}" aria-label="${escape(c.publisher)}: ${escape(c.title)} — source for ${escape(r.name)}">${escape(c.publisher)} ↗</a>`).join("")}</div><div class="card-bottom"><button data-locate="${r.id}" class="map-button"><svg width="13" height="16" viewBox="0 0 18 22" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M16 8c0 6-7 12-7 12S2 14 2 8a7 7 0 1 1 14 0Z"/><circle cx="9" cy="8" r="2.5"/></svg> Find on map</button><a href="${maps(r)}" target="_blank" rel="noopener noreferrer">Google Maps ↗</a>${r.near ? `<a class="directions-link" href="${directions(r)}" target="_blank" rel="noopener noreferrer" aria-label="Walking directions from Eaton HK to ${escape(r.name)}">Walk ↗</a>` : ""}</div></article>`;

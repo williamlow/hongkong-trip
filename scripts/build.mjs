@@ -14,6 +14,11 @@ for (const path of [
   "racing.js",
   "racing-data.js",
   "race-engine.js",
+  "walk.html",
+  "walk.css",
+  "walk.js",
+  "walk-data.js",
+  "walk-utils.js",
   "vendor",
   ".nojekyll",
 ]) {
