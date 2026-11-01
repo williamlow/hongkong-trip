@@ -1792,7 +1792,7 @@ footer > a:last-child {
     margin-right: 5%;
   }
 }
-@media (min-width: 601px) and (max-width: 900px) {
+@media (min-width: 601px) and (max-width: 1150px) {
   .site-header {
     flex-wrap: wrap;
   }
@@ -1804,5 +1804,13 @@ footer > a:last-child {
     gap: 30px;
     padding-top: 16px;
     border-top: 1px solid var(--line);
+  }
+}
+
+@media (max-width: 600px) {
+  .site-header nav {
+    gap: 8px;
+    font-size: 10.5px;
+    flex-wrap: wrap;
   }
 }

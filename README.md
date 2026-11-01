@@ -8,6 +8,8 @@ The top navigation also links to `racing.html`: an introduction to Hong Kong and
 
 The **Kowloon walk** tab (`walk.html`) digitises the ten-stop itinerary in the user's Lonely Planet photograph. It adds independently researched background, six optional heritage/neighbourhood detours, an interactive numbered route map, three mobile-friendly Google Maps walking sections, an optional ferry layer, a KML download and browser-local visited tracking. See [WALK_RESEARCH.md](WALK_RESEARCH.md) for sources, location checks and route limitations, checked 1 November 2026.
 
+The **Neighbourhoods** tab (`neighbourhoods.html`) links to separate day guides for **Sham Shui Po, Sheung Wan, Sai Ying Pun and Wong Chuk Hang**. Each mixes local food, coffee, streets/heritage, art and drinks, with a flexible four-part day plan, numbered map, category filters, Eaton transit directions and a short Google Maps walking section. The 34 mapped places include restaurants reused from the food guide. Five further conversation leads are clearly separated from the researched pins. See [NEIGHBOURHOODS_RESEARCH.md](NEIGHBOURHOODS_RESEARCH.md).
+
 The expansion added 14 food stops, tagged **NEW** and accessible through the new-places filter. Recent Reddit threads were requested but the running environment still blocks Reddit. The racing guide uses Sassy’s August 2026 visitor article and links to HKJC; exact fixture dates remain unconfirmed until official access is applied. See [RACING_RESEARCH.md](RACING_RESEARCH.md). No unverified dates are presented as confirmed meetings.
 
 ## Website and publishing
@@ -36,6 +38,8 @@ npm run preview
 
 The build copies the public site files and vendored Leaflet into `dist/`. All resource URLs are relative, so the same files work under `/hongkong-trip/`.
 
+Before copying, `npm run build` runs `npm run generate` to regenerate the neighbourhood hub and four HTML guides at the repository root. These generated HTML files are committed because GitHub Pages serves the root directly. Edit `neighbourhood-data.js` and `scripts/neighbourhood-pages.mjs`, then regenerate; `neighbourhoods.js` and `neighbourhoods.css` provide map/filter behaviour and presentation. The generated guide text and external navigation links remain readable without JavaScript.
+
 ## Validate
 
 ```sh
@@ -59,3 +63,5 @@ The test configuration uses `/usr/bin/chromium` when present and Playwright's br
 For the walk, edit `walk-data.js` for sourced places and approximate route geometry, `walk-utils.js` for distance/directions/KML, and `walk.html`, `walk.css` and `walk.js` for the interface. Preserve numbers 1–10 and use letters for additions. Check exact branches and addresses before moving pins; keep route estimates distinct from live walking directions.
 
 Saved places use only browser local storage. There is no account system, analytics or tracking. Map-tile failures show an explicit message; cards, numbered pins and Google Maps links remain usable.
+
+Neighbourhood tests check that every guide covers food, coffee and drinks alongside exploring; route waypoint limits, category/card/map synchronisation, popup focus, restaurant-card deep links, transit origins, static content without JavaScript, blocked tiles and navigation at 320px, 768px and 1024px. The header exposes all four tabs on phones and tablets.

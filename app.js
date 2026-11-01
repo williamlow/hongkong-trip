@@ -340,6 +340,12 @@ $("#source-grid").innerHTML = sources
   )
   .join("");
 render();
+const linkedCard = document.getElementById(location.hash.slice(1));
+if (linkedCard?.matches(".restaurant-card")) {
+  requestAnimationFrame(() => {
+    linkedCard.scrollIntoView({ behavior: "instant", block: "start" });
+  });
+}
 const resizeObserver = new ResizeObserver(() => {
   map.invalidateSize({ pan: false });
   fitMap();
