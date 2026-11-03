@@ -10,6 +10,10 @@ The **Kowloon walk** tab (`walk.html`) digitises the ten-stop itinerary in the u
 
 The **Neighbourhoods** tab (`neighbourhoods.html`) links to separate day guides for **Sham Shui Po, Sheung Wan, Sai Ying Pun and Wong Chuk Hang**. Each mixes local food, coffee, streets/heritage, art and drinks, with a flexible four-part day plan, numbered map, category filters, Eaton transit directions and a short Google Maps walking section. The 34 mapped places include restaurants reused from the food guide. Five further conversation leads are clearly separated from the researched pins. See [NEIGHBOURHOODS_RESEARCH.md](NEIGHBOURHOODS_RESEARCH.md).
 
+The **Day trips** tab (`day-trips.html`) compares seven village, island and nature outings, with food, modest walking plans, heat compromises, departure hubs, return checks and fallbacks. A prominently qualified Lai Chi Wo note distinguishes the Tourism Board's published Shatin Area 77 weekday route from Ma Liu Shui weekend access. No current sailing is presented as confirmed.
+
+The **Hikes** tab (`hikes.html`) compares five shorter, wooded or mostly downhill plans. It separates published trail lengths from estimated shortened outings and access walking, describes shade gaps and climbing, identifies exits and excluded extensions, and maps approximate starts/selected finishes. It does not supply surveyed tracks or live heat/closure ratings. See [OUTDOORS_RESEARCH.md](OUTDOORS_RESEARCH.md) for the evaluation and source limitations, checked 3 November 2026.
+
 The expansion added 14 food stops, tagged **NEW** and accessible through the new-places filter. Recent Reddit threads were requested but the running environment still blocks Reddit. The racing guide uses Sassy’s August 2026 visitor article and links to HKJC; exact fixture dates remain unconfirmed until official access is applied. See [RACING_RESEARCH.md](RACING_RESEARCH.md). No unverified dates are presented as confirmed meetings.
 
 ## Website and publishing
@@ -40,6 +44,8 @@ The build copies the public site files and vendored Leaflet into `dist/`. All re
 
 Before copying, `npm run build` runs `npm run generate` to regenerate the neighbourhood hub and four HTML guides at the repository root. These generated HTML files are committed because GitHub Pages serves the root directly. Edit `neighbourhood-data.js` and `scripts/neighbourhood-pages.mjs`, then regenerate; `neighbourhoods.js` and `neighbourhoods.css` provide map/filter behaviour and presentation. The generated guide text and external navigation links remain readable without JavaScript.
 
+The same generate command also runs `scripts/outdoor-pages.mjs` for the two outdoor guides. Edit `outdoors-data.js`, the generator, `outdoors.js` and `outdoors.css` for these pages. Commit regenerated `day-trips.html` and `hikes.html` alongside changes; the root publishes directly. Native details cards and external links remain usable without JavaScript.
+
 ## Validate
 
 ```sh
@@ -64,4 +70,6 @@ For the walk, edit `walk-data.js` for sourced places and approximate route geome
 
 Saved places use only browser local storage. There is no account system, analytics or tracking. Map-tile failures show an explicit message; cards, numbered pins and Google Maps links remain usable.
 
-Neighbourhood tests check that every guide covers food, coffee and drinks alongside exploring; route waypoint limits, category/card/map synchronisation, popup focus, restaurant-card deep links, transit origins, static content without JavaScript, blocked tiles and navigation at 320px, 768px and 1024px. The header exposes all four tabs on phones and tablets.
+Neighbourhood tests check that every guide covers food, coffee and drinks alongside exploring; route waypoint limits, category/card/map synchronisation, popup focus, restaurant-card deep links, transit origins, static content without JavaScript, blocked tiles and navigation at 320px, 768px and 1024px. The header exposes all six tabs on phones and tablets.
+
+Outdoor checks cover the weekday/boat/shorter-stroll distinctions, wooded/downhill/shorter walk filters, map/card synchronisation, selected finish pins, comparison links restoring filtered cards and keyboard focus, high-start taxi directions, source/access integrity, explicitly unconfirmed ferry/weather information, static content without JS, blocked tiles and phone/tablet layouts. Software tests do not establish that a trail or ferry is operating today.

@@ -188,7 +188,7 @@ test("the generated guides retain their food, venue and navigation links without
   }
 });
 
-test("the four-tab navigation and all guides fit small phones and tablets, and maps refit after resizing", async ({
+test("the shared navigation and all guides fit small phones and tablets, and maps refit after resizing", async ({
   page,
 }) => {
   await page.route("https://tile.openstreetmap.org/**", (route) =>

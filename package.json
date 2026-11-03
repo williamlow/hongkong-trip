@@ -8,7 +8,7 @@
     "build": "npm run generate && node scripts/build.mjs",
     "preview": "node scripts/serve.mjs --root dist --port 4173",
     "test": "playwright test",
-    "generate": "node scripts/neighbourhood-pages.mjs"
+    "generate": "node scripts/neighbourhood-pages.mjs && node scripts/outdoor-pages.mjs"
   },
   "dependencies": {
     "leaflet": "1.9.4"
