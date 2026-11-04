@@ -1,0 +1,770 @@
+.game-hero {
+  max-width: 1120px;
+  margin: 42px auto 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+}
+.game-hero .eyebrow {
+  color: var(--red);
+  font-size: 8px;
+}
+.game-hero h1 {
+  font-family: var(--serif);
+  font-size: 62px;
+  line-height: 1.1;
+  letter-spacing: -2px;
+  font-weight: 400;
+  margin: 16px 0;
+}
+.game-hero h1 em {
+  font-weight: 400;
+  color: var(--red);
+}
+.game-hero > div > p:not(.eyebrow) {
+  font-size: 14px;
+  line-height: 1.9;
+  color: var(--muted);
+  margin-bottom: 0;
+}
+.game-hero .explore-link {
+  flex: none;
+}
+.game-arena {
+  max-width: 1120px;
+  margin: 30px auto 0;
+  scroll-margin-top: 16px;
+}
+.game-arena .game-shell {
+  overflow: hidden;
+  border-radius: 6px;
+}
+.game-arena .game-scoreboard {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  padding: 20px 25px;
+}
+.game-arena .horse-score {
+  gap: 10px;
+}
+.game-arena .race-clock strong {
+  font-size: 28px;
+}
+.game-arena .race-clock > span {
+  font-size: 7px;
+}
+.game-arena .course-wrap {
+  max-width: 780px;
+  margin: auto;
+}
+.game-arena #mini-course {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.game-arena .horse-name text {
+  fill: #273b32;
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+}
+.game-arena .horse-name rect {
+  fill: #fffdf8;
+  stroke: #d6d7c8;
+  stroke-width: 1;
+}
+.game-arena #horse-willy {
+  color: #b9412e;
+}
+.game-arena #horse-gilly {
+  color: #52714a;
+}
+.game-arena .horse-runner.is-injured .horse-name rect {
+  stroke: #bd3e2d;
+  stroke-width: 4;
+  fill: #f9e3d4;
+}
+.game-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 16px 25px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  flex-wrap: wrap;
+}
+.game-toolbar > button:not(.primary-button) {
+  font-size: 12px;
+  color: #657653;
+  border: 1px solid #c7cfb9;
+  border-radius: 4px;
+  padding: 11px 14px;
+  line-height: 1.6;
+}
+.game-toolbar .primary-button {
+  min-width: 0;
+  font-size: 12px;
+  padding: 13px 20px;
+  line-height: 1.5;
+  gap: 10px;
+}
+.game-toolbar button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.meter-setting {
+  margin-left: auto;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 10px;
+  color: #7d886f;
+}
+.meter-setting select {
+  padding: 9px 26px 9px 10px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--paper);
+  color: #5e7250;
+  font-size: 11px;
+  min-width: 90px;
+}
+.meter-setting select:disabled {
+  opacity: 0.65;
+}
+.player-panels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 24px 25px;
+}
+.player-panel {
+  --player: #b9412e;
+  --player-light: #f2dfd3;
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--player);
+  border-radius: 5px;
+  padding: 21px;
+  background: var(--white);
+  min-width: 0;
+}
+.gilly-panel {
+  --player: #52714a;
+  --player-light: #e3ead9;
+}
+.player-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.player-heading .eyebrow {
+  font-size: 8px;
+  letter-spacing: 1.2px;
+  color: var(--player);
+  margin: 0 0 5px;
+}
+.player-heading h2 {
+  font-family: var(--serif);
+  font-size: 35px;
+  font-weight: 400;
+  line-height: 1.1;
+  margin: 0;
+  letter-spacing: -0.7px;
+}
+.lap-tag {
+  font-size: 11px;
+  line-height: 1.8;
+  color: var(--player);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 4px 7px;
+  white-space: nowrap;
+}
+.player-race-progress {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin: 18px 0 20px;
+}
+.player-race-progress progress {
+  width: 100%;
+  flex: 1;
+  min-width: 0;
+  height: 5px;
+  border: 0;
+  border-radius: 4px;
+  appearance: none;
+  color: var(--player);
+  background: var(--line);
+}
+.player-race-progress progress::-webkit-progress-bar {
+  background: var(--line);
+  border-radius: 4px;
+}
+.player-race-progress progress::-webkit-progress-value {
+  background: var(--player);
+  border-radius: 4px;
+}
+.player-race-progress progress::-moz-progress-bar {
+  background: var(--player);
+  border-radius: 4px;
+}
+.player-race-progress > span {
+  font-size: 10px;
+  color: #7f8b72;
+  white-space: nowrap;
+}
+.meter-labels {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 9px;
+  line-height: 1.8;
+  color: #8b927d;
+  margin-bottom: 7px;
+}
+.meter-labels strong {
+  color: var(--player);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+.timing-meter {
+  position: relative;
+  height: 37px;
+  background: #ecebdf;
+  border: 1px solid #d7d9ca;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.timing-fill {
+  position: absolute;
+  inset: 0;
+  transform-origin: left;
+  transform: scaleX(0);
+  background: var(--player-light);
+}
+.sweet-spot {
+  position: absolute;
+  left: 45%;
+  width: 10%;
+  inset-block: 0;
+  background: #d3ddba;
+  border-left: 1px solid #a5b487;
+  border-right: 1px solid #a5b487;
+}
+.middle-line {
+  position: absolute;
+  left: 50%;
+  width: 2px;
+  inset-block: 0;
+  background: #647a4e;
+  transform: translateX(-1px);
+}
+.timing-cursor {
+  position: absolute;
+  left: 0;
+  top: 3px;
+  bottom: 3px;
+  width: 5px;
+  background: var(--player);
+  border: 1px solid #fffdf8;
+  border-radius: 3px;
+  transform: translateX(-50%);
+  box-shadow: 0 1px 3px #273b3240;
+}
+.stride-button {
+  width: 100%;
+  background: var(--player);
+  color: var(--paper);
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.7;
+  min-height: 53px;
+  padding: 12px 16px;
+  display: flex;
+  justify-content: center;
+  gap: 13px;
+  align-items: center;
+  margin-top: 13px;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.stride-button:disabled {
+  opacity: 0.48;
+  cursor: default;
+}
+.stride-button:focus-visible,
+.recover-button:focus-visible,
+.game-toolbar button:focus-visible {
+  outline: 3px solid #b7834f;
+  outline-offset: 3px;
+}
+.stride-button:active:not(:disabled) {
+  filter: brightness(0.9);
+}
+kbd {
+  font-family: var(--sans);
+  font-size: 0.8em;
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid currentColor;
+  border-radius: 3px;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 4px;
+  line-height: 1;
+  font-weight: 500;
+  opacity: 0.8;
+}
+.player-alert {
+  font-size: 10px;
+  line-height: 1.8;
+  color: #809071;
+  margin: 13px 0 8px;
+  min-height: 18px;
+}
+.recover-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 43px;
+  border: 1px solid #cbd3bd;
+  color: #61734f;
+  background: #f0f2e9;
+  font-size: 12px;
+  border-radius: 4px;
+  padding: 8px 13px;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.recover-button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.player-panel.is-injured {
+  border-color: #bd3e2d;
+}
+.player-panel.is-injured .player-alert {
+  color: #b03a2b;
+  font-weight: 700;
+}
+.player-panel.is-injured .recover-button {
+  background: #b9412e;
+  color: var(--paper);
+  border-color: #b9412e;
+  font-weight: 600;
+}
+.player-feedback {
+  font-size: 11px;
+  line-height: 1.8;
+  color: #7c876f;
+  margin: 11px 0 0;
+  min-height: 20px;
+}
+.game-outcome {
+  padding: 20px 25px 23px;
+  border-top: 1px solid var(--line);
+  background: #edf0e5;
+}
+.game-outcome #race-result {
+  font-family: var(--serif);
+  font-size: 27px;
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: -0.5px;
+  margin: 0 0 9px;
+}
+.game-outcome #race-result.has-result {
+  color: var(--red);
+}
+.game-outcome #race-status {
+  font-size: 12px;
+  color: #6c7c5e;
+  line-height: 1.8;
+  margin: 0 0 10px;
+}
+.game-outcome > span {
+  font-size: 10px;
+  line-height: 1.8;
+  color: #89927a;
+}
+.game-instructions {
+  max-width: 1120px;
+  margin: 45px auto 0;
+  display: grid;
+  grid-template-columns: 0.85fr 1.4fr;
+  column-gap: 60px;
+  row-gap: 25px;
+}
+.game-instructions h2 {
+  font-family: var(--serif);
+  font-size: 38px;
+  line-height: 1.2;
+  font-weight: 400;
+  letter-spacing: -0.8px;
+  margin: 16px 0;
+}
+.game-instructions > div > p:not(.eyebrow) {
+  font-size: 13px;
+  line-height: 1.95;
+  color: var(--muted);
+}
+.game-instructions > ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px 27px;
+}
+.game-instructions li {
+  border-left: 1px solid var(--line);
+  padding-left: 17px;
+}
+.game-instructions h3 {
+  font-family: var(--serif);
+  font-size: 25px;
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: -0.3px;
+  margin: 0 0 12px;
+}
+.game-instructions li p {
+  font-size: 12px;
+  line-height: 1.95;
+  color: var(--muted);
+  margin: 0;
+}
+.game-instructions li kbd {
+  font-size: 9px;
+  min-width: 18px;
+  height: 18px;
+  vertical-align: middle;
+}
+.game-accessibility {
+  grid-column: 1/-1;
+  font-size: 11px;
+  color: #8b927e;
+  line-height: 1.95;
+  border-top: 1px solid var(--line);
+  padding-top: 20px;
+  margin: 0;
+}
+.game-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 45px;
+  padding: 30px;
+  background: #e8edde;
+  border: 1px solid #c9d2ba;
+  border-radius: 5px;
+}
+.game-link > div {
+  max-width: 750px;
+}
+.game-link h2 {
+  font-family: var(--serif);
+  font-size: 38px;
+  line-height: 1.2;
+  font-weight: 400;
+  margin: 15px 0;
+}
+.game-link p:not(.eyebrow) {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.9;
+  margin-bottom: 0;
+}
+.game-link > a {
+  font-size: 12px;
+  flex: none;
+}
+.game-arena noscript {
+  font-size: 14px;
+  line-height: 1.9;
+}
+@keyframes game-gallop {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2.5px);
+  }
+}
+body[data-game-phase="racing"] .horse-body use {
+  animation: game-gallop 0.22s linear infinite;
+}
+body[data-game-phase="racing"] .horse-runner.is-injured .horse-body use {
+  animation: none;
+}
+@media (max-width: 1220px) {
+  .game-hero,
+  .game-arena,
+  .game-instructions {
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+}
+@media (max-width: 900px) {
+  .game-hero {
+    margin-top: 30px;
+  }
+  .game-hero h1 {
+    font-size: 53px;
+  }
+  .game-arena .course-wrap {
+    max-width: 650px;
+  }
+  .game-instructions {
+    column-gap: 35px;
+    grid-template-columns: 0.8fr 1.3fr;
+  }
+  .game-instructions > ol {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+  .game-instructions h2 {
+    font-size: 32px;
+  }
+  .game-toolbar {
+    gap: 10px;
+  }
+  .player-panel {
+    padding: 18px;
+  }
+  .game-link {
+    display: block;
+  }
+  .game-link > a {
+    margin-top: 23px;
+  }
+}
+@media (max-width: 600px) {
+  .game-hero {
+    margin-top: 28px;
+    display: block;
+  }
+  .game-hero h1 {
+    font-size: 49px;
+    margin: 17px 0;
+  }
+  .game-hero > div > p:not(.eyebrow) {
+    font-size: 13px;
+  }
+  .game-hero > .explore-link {
+    margin-top: 14px;
+    font-size: 11px;
+  }
+  .game-arena {
+    margin-top: 24px;
+    scroll-margin-top: 8px;
+  }
+  .game-arena .game-scoreboard {
+    padding: 13px 12px;
+    gap: 9px;
+    grid-template-columns: 1fr 70px 1fr;
+  }
+  .game-arena .horse-score {
+    gap: 4px;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 10px;
+  }
+  .game-arena .horse-score strong {
+    font-size: 14px;
+  }
+  .game-arena .horse-score > span:last-child {
+    flex-basis: 100%;
+    text-align: center;
+    font-size: 9px;
+  }
+  .game-arena .score-dot {
+    width: 7px;
+    height: 7px;
+  }
+  .game-arena .race-clock strong {
+    font-size: 23px;
+  }
+  .game-arena .race-clock > span {
+    font-size: 5px;
+    letter-spacing: 0.5px;
+  }
+  .game-toolbar {
+    padding: 12px;
+    gap: 9px;
+  }
+  .game-toolbar .primary-button {
+    font-size: 11px;
+    padding: 11px 10px;
+  }
+  .game-toolbar > button:not(.primary-button) {
+    font-size: 10px;
+    padding: 10px;
+  }
+  .game-toolbar > button kbd {
+    display: none;
+  }
+  .meter-setting {
+    font-size: 10px;
+    gap: 9px;
+    margin-left: 0;
+    flex-basis: 100%;
+    justify-content: space-between;
+  }
+  .meter-setting select {
+    padding: 7px 26px 7px 9px;
+    min-width: 108px;
+    font-size: 11px;
+  }
+  .player-panels {
+    gap: 9px;
+    padding: 13px 11px;
+  }
+  .player-panel {
+    padding: 13px 10px;
+    border-top-width: 3px;
+  }
+  .player-heading {
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .player-heading h2 {
+    font-size: 26px;
+  }
+  .player-heading .eyebrow {
+    font-size: 7px;
+  }
+  .lap-tag {
+    font-size: 9px;
+    padding: 2px 4px;
+  }
+  .player-race-progress {
+    display: block;
+    margin: 12px 0 14px;
+  }
+  .player-race-progress progress {
+    display: block;
+    width: 100%;
+    height: 4px;
+  }
+  .player-race-progress > span {
+    display: block;
+    font-size: 9px;
+    margin-top: 6px;
+  }
+  .meter-labels {
+    gap: 5px;
+    font-size: 7px;
+    margin-bottom: 6px;
+  }
+  .meter-labels strong {
+    font-size: 7px;
+    letter-spacing: 0.2px;
+  }
+  .timing-meter {
+    height: 30px;
+  }
+  .timing-cursor {
+    width: 4px;
+  }
+  .stride-button {
+    font-size: 11px;
+    line-height: 1.4;
+    padding: 10px 7px;
+    min-height: 52px;
+    gap: 7px;
+    margin-top: 10px;
+  }
+  .stride-button > span {
+    flex: 1;
+    max-width: 70px;
+  }
+  .stride-button kbd {
+    font-size: 10px;
+    min-width: 19px;
+    height: 21px;
+  }
+  .player-alert {
+    font-size: 9px;
+    line-height: 1.6;
+    min-height: 28px;
+    margin: 11px 0 7px;
+  }
+  .recover-button {
+    font-size: 11px;
+    min-height: 44px;
+    gap: 7px;
+    padding: 7px 5px;
+  }
+  .recover-button kbd {
+    font-size: 10px;
+    min-width: 19px;
+    height: 19px;
+  }
+  .player-feedback {
+    font-size: 10px;
+    line-height: 1.7;
+    min-height: 34px;
+    margin-top: 10px;
+  }
+  .game-outcome {
+    padding: 16px 15px;
+  }
+  .game-outcome #race-result {
+    font-size: 24px;
+  }
+  .game-outcome #race-status {
+    font-size: 12px;
+    line-height: 1.8;
+  }
+  .game-outcome > span {
+    font-size: 9px;
+  }
+  .game-instructions {
+    display: block;
+    margin-top: 35px;
+  }
+  .game-instructions h2 {
+    font-size: 33px;
+  }
+  .game-instructions > div > p:not(.eyebrow) {
+    font-size: 14px;
+  }
+  .game-instructions > ol {
+    margin-top: 25px;
+  }
+  .game-instructions h3 {
+    font-size: 26px;
+  }
+  .game-instructions li p {
+    font-size: 13px;
+  }
+  .game-accessibility {
+    font-size: 12px;
+    margin-top: 27px;
+  }
+  .game-link {
+    padding: 25px;
+  }
+  .game-link h2 {
+    font-size: 32px;
+  }
+  .game-link p:not(.eyebrow) {
+    font-size: 13px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  body[data-game-phase="racing"] .horse-body use {
+    animation: none !important;
+  }
+}

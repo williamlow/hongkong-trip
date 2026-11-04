@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#f7f4ec" />
     <meta
       name="description"
-      content="A first-timer’s Happy Valley racing guide: planning an evening, reading the racecard, betting basics, useful terms and a playful Willy versus Gilly horse race."
+      content="A first-timer’s Happy Valley racing guide: planning an evening, reading the racecard, betting basics, useful terms and a link to the two-player Willy versus Gilly game."
     />
     <link rel="stylesheet" href="./styles.css" />
     <link rel="stylesheet" href="./racing.css" />
@@ -32,8 +32,8 @@
         ><a href="./racing.html" aria-current="page">Happy Valley</a
         ><a href="./walk.html">Kowloon walk</a
         ><a href="./neighbourhoods.html">Neighbourhoods</a
-        ><a href="./day-trips.html">Day trips</a
-        ><a href="./hikes.html">Hikes</a>
+        ><a href="./day-trips.html">Day trips</a><a href="./hikes.html">Hikes</a
+        ><a href="./race-game.html">Race game</a>
       </nav>
       <a
         class="hotel-link"
@@ -545,185 +545,22 @@
         </div>
       </section>
       <section
-        class="racing-section game-section"
+        class="racing-section game-link"
         id="mini-race"
         aria-labelledby="game-title"
       >
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow">THE SMALLEST MEETING IN HONG KONG</p>
-            <h2 id="game-title">Willy vs Gilly.</h2>
-          </div>
+        <div>
+          <p class="eyebrow">YOUR OWN LITTLE RACE MEETING</p>
+          <h2 id="game-title">Willy vs Gilly.</h2>
           <p>
-            Two laps. One fresh 50/50 draw.<br />Just for fun, with no money
-            involved.
+            Four laps, two players and a timing meter for each horse. Find the
+            sweet spot, keep your pace up and be ready to recover from an
+            injury.
           </p>
         </div>
-        <div class="game-shell">
-          <div class="game-scoreboard">
-            <div class="horse-score willy-score">
-              <span class="score-dot"></span><strong>Willy</strong
-              ><span><b id="willy-wins">0</b> wins</span>
-            </div>
-            <div class="race-clock">
-              <strong id="race-timer" aria-hidden="true">0.0</strong
-              ><span>SECONDS · TWO LAPS</span>
-            </div>
-            <div class="horse-score gilly-score">
-              <span class="score-dot"></span><strong>Gilly</strong
-              ><span><b id="gilly-wins">0</b> wins</span>
-            </div>
-          </div>
-          <div class="course-wrap">
-            <svg
-              id="mini-course"
-              viewBox="0 0 800 420"
-              role="img"
-              aria-label="A miniature oval racecourse where Willy and Gilly race two laps clockwise"
-            >
-              <defs>
-                <pattern
-                  id="finish-check"
-                  width="12"
-                  height="12"
-                  patternUnits="userSpaceOnUse"
-                >
-                  <rect width="12" height="12" fill="#fffdf8" />
-                  <path d="M0 0h6v6H0Zm6 6h6v6H6Z" fill="#273b32" />
-                </pattern>
-                <g id="horse-symbol">
-                  <path
-                    d="m-25 8 5-10 13-3 14 3 5-12 12-3 7 8-6 3-3-3-1 13-9 4-3 15h-5l-1-14-12-1-7 15h-5l4-18-8-1-5 7-4-3Z"
-                    fill="#604332"
-                  />
-                  <path
-                    d="m-26 6-7-8"
-                    stroke="#604332"
-                    stroke-width="4"
-                    stroke-linecap="round"
-                  />
-                  <path
-                    d="m8-15 6-4 10 1"
-                    stroke="#342d27"
-                    stroke-width="4"
-                    fill="none"
-                  />
-                  <rect
-                    x="-9"
-                    y="-4"
-                    width="17"
-                    height="8"
-                    rx="3"
-                    fill="currentColor"
-                  />
-                  <circle cx="-1" cy="-20" r="5" fill="#e7c9a0" />
-                  <path
-                    d="m-5-13 3 10 9-5"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="7"
-                    stroke-linecap="round"
-                  />
-                  <path d="M-7-23q5-7 11 1" fill="currentColor" />
-                </g>
-              </defs>
-              <rect
-                x="25"
-                y="25"
-                width="750"
-                height="370"
-                rx="180"
-                fill="#e0e6d1"
-              />
-              <path
-                d="M400 95H610A115 115 0 0 1 610 325H190A115 115 0 0 1 190 95Z"
-                fill="none"
-                stroke="#b49a72"
-                stroke-width="72"
-              />
-              <path
-                id="lane-willy"
-                d="M400 80H610A130 130 0 0 1 610 340H190A130 130 0 0 1 190 80Z"
-                fill="none"
-                stroke="#efe2bd"
-                stroke-width="2"
-                stroke-dasharray="5 9"
-              />
-              <path
-                id="lane-gilly"
-                d="M400 110H610A100 100 0 0 1 610 310H190A100 100 0 0 1 190 110Z"
-                fill="none"
-                stroke="#efe2bd"
-                stroke-width="2"
-                stroke-dasharray="5 9"
-              />
-              <rect
-                x="394"
-                y="57"
-                width="12"
-                height="76"
-                fill="url(#finish-check)"
-              />
-              <text x="400" y="44" text-anchor="middle" class="course-label">
-                START / FINISH
-              </text>
-              <rect
-                x="210"
-                y="163"
-                width="380"
-                height="95"
-                rx="46"
-                fill="#c0cca7"
-              />
-              <text x="400" y="202" text-anchor="middle" class="infield-title">
-                HAPPY LITTLE VALLEY
-              </text>
-              <text x="400" y="227" text-anchor="middle" class="infield-sub">
-                WILLY &amp; GILLY RACING CLUB
-              </text>
-              <g class="horse-runner" id="horse-willy" aria-hidden="true">
-                <g class="horse-body"><use href="#horse-symbol" /></g>
-                <g class="horse-name">
-                  <rect x="-27" y="-53" width="54" height="21" rx="10" />
-                  <text x="0" y="-38" text-anchor="middle">Willy</text>
-                </g>
-              </g>
-              <g class="horse-runner" id="horse-gilly" aria-hidden="true">
-                <g class="horse-body"><use href="#horse-symbol" /></g>
-                <g class="horse-name">
-                  <rect x="-27" y="-53" width="54" height="21" rx="10" />
-                  <text x="0" y="-38" text-anchor="middle">Gilly</text>
-                </g>
-              </g>
-            </svg>
-          </div>
-          <div class="game-controls">
-            <div>
-              <p id="race-result">Two laps. Two hopefuls. One winner.</p>
-              <span
-                ><b id="race-count">0</b> races completed · scores reset when
-                this page reloads</span
-              >
-            </div>
-            <button id="start-race" class="primary-button">
-              Start the race ↗
-            </button>
-          </div>
-          <p
-            id="race-status"
-            class="game-status"
-            role="status"
-            aria-live="polite"
-          >
-            Ready when you are. Pick a favourite and press Start.
-          </p>
-          <p class="game-footnote">
-            Every start makes a new independent random draw. Willy and Gilly
-            each have a 50% chance, so repeat winners are normal. Reduced-motion
-            settings give an immediate result instead of an animated race. This
-            game does not model real racing odds.
-          </p>
-        </div>
+        <a class="primary-button" href="./race-game.html#race-arena"
+          >Play the two-player race ↗</a
+        >
       </section>
       <section
         class="racing-section racing-sources"

@@ -82,7 +82,7 @@ async function openPage(page, kind) {
   );
 }
 
-test("all existing sections expose the six-tab navigation and both new pages load without runtime errors", async ({
+test("all existing sections expose the seven-tab navigation and both new pages load without runtime errors", async ({
   page,
 }) => {
   const errors = [];
@@ -99,7 +99,7 @@ test("all existing sections expose the six-tab navigation and both new pages loa
   ]) {
     await page.goto(path, { waitUntil: "domcontentloaded" });
     const nav = page.getByRole("navigation", { name: "Main navigation" });
-    await expect(nav.getByRole("link")).toHaveCount(6);
+    await expect(nav.getByRole("link")).toHaveCount(7);
     await expect(
       nav.getByRole("link", { name: "Day trips", exact: true }),
     ).toHaveAttribute("href", "./day-trips.html");

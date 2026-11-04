@@ -944,3 +944,42 @@
     font-size: 12px;
   }
 }
+
+.game-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  border: 1px solid #c9d2ba;
+  border-radius: 5px;
+  background: #e8edde;
+  padding: 30px;
+}
+.game-link > div {
+  max-width: 750px;
+}
+.game-link h2 {
+  font-family: var(--serif);
+  font-size: 38px;
+  line-height: 1.2;
+  font-weight: 400;
+  margin: 15px 0;
+}
+.game-link p:not(.eyebrow) {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.9;
+  margin-bottom: 0;
+}
+.game-link > a {
+  font-size: 12px;
+  flex: none;
+}
+@media (max-width: 900px) {
+  .game-link {
+    display: block;
+  }
+  .game-link > a {
+    margin-top: 23px;
+  }
+}

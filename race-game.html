@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f7f4ec" />
+    <meta
+      name="description"
+      content="Willy vs Gilly: a two-player, four-lap horse race. Time the bouncing meter, boost your pace and recover from injuries on one shared screen."
+    />
+    <title>Willy vs Gilly · Two-player race</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./racing.css" />
+    <link rel="stylesheet" href="./race-game.css" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Crect width='80' height='80' rx='20' fill='%23273b32'/%3E%3Ctext x='40' y='55' text-anchor='middle' font-size='44' fill='%23fff' font-family='serif'%3E馬%3C/text%3E%3C/svg%3E"
+    />
+  </head>
+  <body data-game-phase="ready">
+    <a class="skip-link" href="#race-arena">Skip to the game</a>
+    <header class="site-header">
+      <a class="brand" href="./index.html"
+        ><span class="brand-stamp" lang="zh-Hant">食</span
+        ><span
+          >ONE MORE BITE<span class="brand-sub"
+            >HONG KONG FIELD NOTES</span
+          ></span
+        ></a
+      >
+      <nav aria-label="Main navigation">
+        <a href="./index.html#explore">Food guide</a>
+        <a href="./racing.html">Happy Valley</a>
+        <a href="./walk.html">Kowloon walk</a
+        ><a href="./neighbourhoods.html">Neighbourhoods</a
+        ><a href="./day-trips.html">Day trips</a><a href="./hikes.html">Hikes</a
+        ><a href="./race-game.html" aria-current="page">Race game</a>
+      </nav>
+      <a
+        class="hotel-link"
+        id="hotel-link"
+        target="_blank"
+        rel="noopener noreferrer"
+        ><span class="status-dot"></span> BASE: EATON HK
+        <span aria-hidden="true">↗</span></a
+      >
+    </header>
+    <main>
+      <section class="game-hero">
+        <div>
+          <p class="eyebrow">THE SMALLEST MEETING IN HONG KONG / 雙人賽馬</p>
+          <h1>Willy <em>vs</em> Gilly.</h1>
+          <p>Four laps. Two players. Find your rhythm and race for the line.</p>
+        </div>
+        <a class="explore-link" href="#how-to-play"
+          >How to play <span aria-hidden="true">↓</span></a
+        >
+      </section>
+      <section
+        class="game-arena"
+        id="race-arena"
+        aria-label="Two-player horse race"
+      >
+        <div class="game-shell">
+          <div class="game-scoreboard">
+            <div class="horse-score willy-score">
+              <span class="score-dot"></span><strong>Willy</strong
+              ><span><b id="willy-wins">0</b> wins</span>
+            </div>
+            <div class="race-clock">
+              <strong id="race-timer" aria-hidden="true">0.0</strong
+              ><span>SECONDS · FOUR LAPS</span>
+            </div>
+            <div class="horse-score gilly-score">
+              <span class="score-dot"></span><strong>Gilly</strong
+              ><span><b id="gilly-wins">0</b> wins</span>
+            </div>
+          </div>
+          <div class="course-wrap">
+            <svg
+              id="mini-course"
+              viewBox="0 0 800 420"
+              role="img"
+              aria-label="A miniature oval racecourse where Willy and Gilly race four laps clockwise"
+            >
+              <defs>
+                <pattern
+                  id="finish-check"
+                  width="12"
+                  height="12"
+                  patternUnits="userSpaceOnUse"
+                >
+                  <rect width="12" height="12" fill="#fffdf8" />
+                  <path d="M0 0h6v6H0Zm6 6h6v6H6Z" fill="#273b32" />
+                </pattern>
+                <g id="horse-symbol">
+                  <path
+                    d="m-25 8 5-10 13-3 14 3 5-12 12-3 7 8-6 3-3-3-1 13-9 4-3 15h-5l-1-14-12-1-7 15h-5l4-18-8-1-5 7-4-3Z"
+                    fill="#604332"
+                  />
+                  <path
+                    d="m-26 6-7-8"
+                    stroke="#604332"
+                    stroke-width="4"
+                    stroke-linecap="round"
+                  />
+                  <path
+                    d="m8-15 6-4 10 1"
+                    stroke="#342d27"
+                    stroke-width="4"
+                    fill="none"
+                  />
+                  <rect
+                    x="-9"
+                    y="-4"
+                    width="17"
+                    height="8"
+                    rx="3"
+                    fill="currentColor"
+                  />
+                  <circle cx="-1" cy="-20" r="5" fill="#e7c9a0" />
+                  <path
+                    d="m-5-13 3 10 9-5"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="7"
+                    stroke-linecap="round"
+                  />
+                  <path d="M-7-23q5-7 11 1" fill="currentColor" />
+                </g>
+              </defs>
+              <rect
+                x="25"
+                y="25"
+                width="750"
+                height="370"
+                rx="180"
+                fill="#e0e6d1"
+              />
+              <path
+                d="M400 95H610A115 115 0 0 1 610 325H190A115 115 0 0 1 190 95Z"
+                fill="none"
+                stroke="#b49a72"
+                stroke-width="72"
+              />
+              <path
+                id="lane-willy"
+                d="M400 80H610A130 130 0 0 1 610 340H190A130 130 0 0 1 190 80Z"
+                fill="none"
+                stroke="#efe2bd"
+                stroke-width="2"
+                stroke-dasharray="5 9"
+              />
+              <path
+                id="lane-gilly"
+                d="M400 110H610A100 100 0 0 1 610 310H190A100 100 0 0 1 190 110Z"
+                fill="none"
+                stroke="#efe2bd"
+                stroke-width="2"
+                stroke-dasharray="5 9"
+              />
+              <rect
+                x="394"
+                y="57"
+                width="12"
+                height="76"
+                fill="url(#finish-check)"
+              />
+              <text x="400" y="44" text-anchor="middle" class="course-label">
+                START / FINISH
+              </text>
+              <rect
+                x="210"
+                y="163"
+                width="380"
+                height="95"
+                rx="46"
+                fill="#c0cca7"
+              />
+              <text
+                x="400"
+                y="202"
+                text-anchor="middle"
+                class="infield-title"
+                id="course-callout"
+              >
+                READY TO RACE?
+              </text>
+              <text
+                x="400"
+                y="227"
+                text-anchor="middle"
+                class="infield-sub"
+                id="course-detail"
+              >
+                FOUR LAPS · TWO PLAYERS
+              </text>
+              <g class="horse-runner" id="horse-willy" aria-hidden="true">
+                <g class="horse-body"><use href="#horse-symbol" /></g>
+                <g class="horse-name">
+                  <rect x="-27" y="-53" width="54" height="21" rx="10" />
+                  <text x="0" y="-38" text-anchor="middle">Willy</text>
+                </g>
+              </g>
+              <g class="horse-runner" id="horse-gilly" aria-hidden="true">
+                <g class="horse-body"><use href="#horse-symbol" /></g>
+                <g class="horse-name">
+                  <rect x="-27" y="-53" width="54" height="21" rx="10" />
+                  <text x="0" y="-38" text-anchor="middle">Gilly</text>
+                </g>
+              </g>
+            </svg>
+          </div>
+          <div class="game-toolbar">
+            <button id="start-race" class="primary-button" disabled>
+              Start the race ↗</button
+            ><button id="pause-race" aria-keyshortcuts="P" disabled>
+              Pause <kbd>P</kbd></button
+            ><button id="restart-race" disabled>Restart race</button
+            ><label class="meter-setting" for="meter-speed"
+              >Meter speed<select id="meter-speed">
+                <option value="1450">Quick</option>
+                <option value="2800">Gentle</option>
+              </select></label
+            >
+          </div>
+          <div class="player-panels">
+            <section
+              class="player-panel willy-panel"
+              aria-label="Player 1: Willy"
+              id="player-willy"
+            >
+              <div class="player-heading">
+                <div>
+                  <p class="eyebrow">PLAYER 1</p>
+                  <h2>Willy</h2>
+                </div>
+                <span id="lap-willy" class="lap-tag">Lap 1 / 4</span>
+              </div>
+              <div class="player-race-progress">
+                <progress
+                  id="distance-willy"
+                  max="4"
+                  value="0"
+                  aria-label="Willy race distance"
+                ></progress
+                ><span id="pace-willy">1.0× pace</span>
+              </div>
+              <div class="meter-labels">
+                <span>0%</span><strong>HIT 50%</strong><span>100%</span>
+              </div>
+              <div
+                class="timing-meter"
+                id="meter-willy"
+                role="meter"
+                aria-label="Willy timing meter; aim for 50 percent"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-valuenow="0"
+              >
+                <span class="timing-fill" id="fill-willy"></span
+                ><span class="sweet-spot" aria-hidden="true"></span
+                ><span class="middle-line" aria-hidden="true"></span
+                ><span
+                  class="timing-cursor"
+                  id="cursor-willy"
+                  aria-hidden="true"
+                ></span>
+              </div>
+              <button
+                class="stride-button"
+                id="stride-willy"
+                aria-label="Time Willy’s stride (A)"
+                aria-keyshortcuts="A"
+                disabled
+              >
+                <span id="stride-label-willy">Time the stride</span><kbd>A</kbd>
+              </button>
+              <div
+                class="player-alert"
+                id="alert-willy"
+                role="status"
+                aria-live="polite"
+              >
+                Ready for the start.
+              </div>
+              <button
+                class="recover-button"
+                id="recover-willy"
+                aria-label="Recover Willy (S)"
+                aria-keyshortcuts="S"
+                disabled
+              >
+                Recover <kbd>S</kbd>
+              </button>
+              <p
+                class="player-feedback"
+                id="feedback-willy"
+                role="status"
+                aria-live="polite"
+              >
+                Aim for the centre line.
+              </p>
+            </section>
+            <section
+              class="player-panel gilly-panel"
+              aria-label="Player 2: Gilly"
+              id="player-gilly"
+            >
+              <div class="player-heading">
+                <div>
+                  <p class="eyebrow">PLAYER 2</p>
+                  <h2>Gilly</h2>
+                </div>
+                <span id="lap-gilly" class="lap-tag">Lap 1 / 4</span>
+              </div>
+              <div class="player-race-progress">
+                <progress
+                  id="distance-gilly"
+                  max="4"
+                  value="0"
+                  aria-label="Gilly race distance"
+                ></progress
+                ><span id="pace-gilly">1.0× pace</span>
+              </div>
+              <div class="meter-labels">
+                <span>0%</span><strong>HIT 50%</strong><span>100%</span>
+              </div>
+              <div
+                class="timing-meter"
+                id="meter-gilly"
+                role="meter"
+                aria-label="Gilly timing meter; aim for 50 percent"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-valuenow="0"
+              >
+                <span class="timing-fill" id="fill-gilly"></span
+                ><span class="sweet-spot" aria-hidden="true"></span
+                ><span class="middle-line" aria-hidden="true"></span
+                ><span
+                  class="timing-cursor"
+                  id="cursor-gilly"
+                  aria-hidden="true"
+                ></span>
+              </div>
+              <button
+                class="stride-button"
+                id="stride-gilly"
+                aria-label="Time Gilly’s stride (K)"
+                aria-keyshortcuts="K"
+                disabled
+              >
+                <span id="stride-label-gilly">Time the stride</span><kbd>K</kbd>
+              </button>
+              <div
+                class="player-alert"
+                id="alert-gilly"
+                role="status"
+                aria-live="polite"
+              >
+                Ready for the start.
+              </div>
+              <button
+                class="recover-button"
+                id="recover-gilly"
+                aria-label="Recover Gilly (L)"
+                aria-keyshortcuts="L"
+                disabled
+              >
+                Recover <kbd>L</kbd>
+              </button>
+              <p
+                class="player-feedback"
+                id="feedback-gilly"
+                role="status"
+                aria-live="polite"
+              >
+                Aim for the centre line.
+              </p>
+            </section>
+          </div>
+          <div class="game-outcome">
+            <p id="race-result">First to finish four laps wins.</p>
+            <p id="race-status" role="status" aria-live="polite">
+              Two people, one device. Choose your horse, then start.
+            </p>
+            <span
+              ><b id="race-count">0</b> races completed ·
+              <b id="draw-count">0</b> draws · scores reset on reload</span
+            >
+          </div>
+        </div>
+        <noscript
+          ><p>
+            This two-player game needs JavaScript. The Happy Valley visitor
+            guide is available from the top navigation.
+          </p></noscript
+        >
+      </section>
+      <section
+        class="game-instructions"
+        id="how-to-play"
+        aria-labelledby="instructions-title"
+      >
+        <div>
+          <p class="eyebrow">A LITTLE TIMING GOES A LONG WAY</p>
+          <h2 id="instructions-title">
+            Find the middle.<br />Keep your horse moving.
+          </h2>
+          <p>
+            Share one keyboard or use the two touch panels. Willy is player one;
+            Gilly is player two. A three-second countdown gives you both time to
+            get ready.
+          </p>
+        </div>
+        <ol>
+          <li>
+            <h3>Hit the centre</h3>
+            <p>
+              The meter fills from 0% to 100% and back. Press your stride button
+              at 50%: <kbd>A</kbd> for Willy, <kbd>K</kbd> for Gilly. Closer
+              timing means more speed. A wide hit can slow you down.
+            </p>
+          </li>
+          <li>
+            <h3>Let the next sweep begin</h3>
+            <p>
+              Each hit locks the meter briefly, then starts a fresh sweep. The
+              0.9-second cooldown means rapid tapping will not beat good timing.
+              Your boost lasts a few seconds, then fades towards normal pace.
+            </p>
+          </li>
+          <li>
+            <h3>Watch for an injury</h3>
+            <p>
+              Each horse can pick up two temporary injuries during the middle
+              laps. Press <kbd>S</kbd> to recover Willy or <kbd>L</kbd> to
+              recover Gilly as soon as the alert appears. Recovery clears the
+              slowdown immediately; unattended injuries clear after eight
+              seconds.
+            </p>
+          </li>
+          <li>
+            <h3>Race all four laps</h3>
+            <p>
+              The first horse across the line wins; an exact photo finish can be
+              a draw. Press <kbd>P</kbd> or use Pause whenever you need a break.
+              Switching tabs or leaving the window pauses the game until you
+              resume.
+            </p>
+          </li>
+        </ol>
+        <p class="game-accessibility">
+          Gentle meters give both players more time. Reduced-motion preferences
+          select Gentle by default and remove decorative galloping; the timing
+          game still runs. Meter speed stays fixed for the current race.
+          Randomness changes injury locations, while your timing and recovery
+          decide the race.
+        </p>
+      </section>
+    </main>
+    <footer>
+      <a class="footer-brand" href="./index.html"
+        >ONE MORE BITE <span lang="zh-Hant">食好啲</span></a
+      ><a href="./racing.html">Happy Valley visitor guide ↗</a
+      ><a href="#race-arena">Back to the track ↑</a>
+    </footer>
+    <script type="module" src="./race-game.js"></script>
+  </body>
+</html>

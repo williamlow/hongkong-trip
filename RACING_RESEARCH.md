@@ -21,8 +21,8 @@ Requests to the Jockey Club racing/visitor hosts failed with a 403 tunnel denial
 
 General practical advice (arriving early, checking tickets, setting a total entertainment stake and comparing relevant form) is editorial guidance, not a guarantee of a payout or profit. No live horses, tips, current odds or predicted results are supplied. The guide distinguishes collecting on a Place bet from making a profit across all tickets.
 
-## Mini race
+## Two-player race game
 
-The Willy/Gilly game is unrelated to real-world betting. Browser `crypto.getRandomValues` supplies a new uniform draw for each start; the lower half of the interval chooses Willy and the upper half chooses Gilly. Repeated winners are allowed. Separate random values set animation pace; they never change the selected winner. Both horses complete two laps, with the chosen winner assigned the shorter finishing time. Scores reset on reload. Reduced-motion mode resolves immediately.
+The Willy/Gilly game now lives on its own `race-game.html` tab. It is a four-lap, two-player timing game: accuracy around the meter's 50% point sets pace, and separate recovery controls clear temporary injury slowdowns. Random values set injury locations in the middle laps; the winner is determined by race progress. The visitor guide retains a link at `#mini-race` for older anchors. Fixture rendering stays in `racing.js`; gameplay is separate in `race-game.js`. See [RACE_GAME.md](RACE_GAME.md) for the controls, balance and simulation rules.
 
-Tests cover both possible winner branches, repeat winners, monotonic bounded progress, winner/finish order, actual animation, duplicate-start protection, scoreboard updates, replay, reduced motion and mobile layout. Passing these tests validates the software, not the factual freshness of racing schedules.
+Tests cover both players earning wins through play, timing/pace and cooldown rules, injury recovery, finish ordering inside a frame, draws, separate keyboard/touch controls, pause/restart, scoreboard/replay, reduced motion and mobile layout. Passing these tests validates the software, not the factual freshness of racing schedules.
